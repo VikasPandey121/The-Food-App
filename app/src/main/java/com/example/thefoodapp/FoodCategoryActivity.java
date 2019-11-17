@@ -3,11 +3,13 @@ package com.example.thefoodapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class FoodCategoryActivity extends ListActivity {
+public class FoodCategoryActivity extends ListActivity {//dont forget to change AppCompactivity to ListActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,5 +19,13 @@ public class FoodCategoryActivity extends ListActivity {
 
         ArrayAdapter<Food> listAdapter = new ArrayAdapter<Food>(this, android.R.layout.simple_list_item_1,Food.foods);
         listfood.setAdapter(listAdapter);
+    }
+
+    @Override
+    protected void onListItemClick(ListView listView, View itemView, int position, long id) {
+        super.onListItemClick(listView, itemView, position, id);
+        Intent intent = new Intent(FoodCategoryActivity.this, FoodActivity.class);
+        intent.putExtra(FoodActivity.EXTRA_FOODNO, (int) id);
+        startActivity(intent);
     }
 }
